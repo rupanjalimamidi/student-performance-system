@@ -20,10 +20,10 @@ The Student Performance Tracking System provides a centralized platform to manag
 
 ## 🛠️ Technology Stack
 
-- **Backend:** Python, Flask
-- **Frontend:** HTML, CSS, Jinja2
-- **Database:** SQLite
-- **Development Tool:** Visual Studio Code
+- Backend: Python, Flask
+-Frontend: HTML, CSS
+- Database: SQLite
+-Development Tool: Visual Studio Code
 
 ## 📁 Project Structure
 
