@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Performance | StudentTrack</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body class="dashboard-body">
+
+    <aside class="sidebar">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                🎓
+            </div>
+
+            <div>
+                <h2>StudentTrack</h2>
+                <span>Performance System</span>
+            </div>
+
+        </div>
+
+
+        <nav class="sidebar-menu">
+
+            <a href="/dashboard" class="menu-item">
+                <span>📊</span>
+                Dashboard
+            </a>
+
+            <a href="/students" class="menu-item">
+                <span>👨‍🎓</span>
+                Students
+            </a>
+
+            <a href="/performance" class="menu-item active">
+                <span>📝</span>
+                Performance
+            </a>
+
+            <a href="#" class="menu-item">
+                <span>📅</span>
+                Attendance
+            </a>
+
+            <a href="#" class="menu-item">
+                <span>📄</span>
+                Reports
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <a href="/" class="menu-item logout">
+                <span>🚪</span>
+                Logout
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <main class="main-content">
+
+        <header class="topbar">
+
+            <div>
+
+                <h1>Performance</h1>
+
+                <p>
+                    Track student academic performance
+                </p>
+
+            </div>
+
+
+            <div class="profile">
+
+                <div class="notification">
+                    🔔
+                </div>
+
+                <div class="avatar">
+                    A
+                </div>
+
+                <div>
+                    <strong>Admin</strong>
+                    <small>Administrator</small>
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <div class="dashboard-card">
+
+            <div class="card-header">
+
+                <div>
+
+                    <h3>Student Performance</h3>
+
+                    <p>
+                        Select a student to view performance
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            {% if students %}
+
+            <div class="student-performance-list">
+
+                {% for student in students %}
+
+                <div class="performance-student-row">
+
+                    <div class="student-avatar">
+                        {{ student["name"][0] }}
+                    </div>
+
+                    <div class="student-info">
+
+                        <strong>
+                            {{ student["name"] }}
+                        </strong>
+
+                        <span>
+                            {{ student["student_id"] }}
+                            •
+                            {{ student["department"] }}
+                        </span>
+
+                    </div>
+
+                    <a
+                        href="/student-performance/{{ student['student_id'] }}"
+                        class="view-button"
+                    >
+                        View Performance →
+                    </a>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+            {% else %}
+
+            <div class="empty-state">
+
+                <div>📊</div>
+
+                <h3>No students available</h3>
+
+                <p>
+                    Add students before recording performance.
+                </p>
+
+                <a href="/add-student">
+                    <button class="primary-button">
+                        + Add Student
+                    </button>
+                </a>
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>

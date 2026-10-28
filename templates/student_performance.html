@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Student Performance | StudentTrack</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body class="dashboard-body">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                🎓
+            </div>
+
+            <div>
+                <h2>StudentTrack</h2>
+                <span>Performance System</span>
+            </div>
+
+        </div>
+
+
+        <nav class="sidebar-menu">
+
+            <a href="/dashboard" class="menu-item">
+                <span>📊</span>
+                Dashboard
+            </a>
+
+            <a href="/students" class="menu-item">
+                <span>👨‍🎓</span>
+                Students
+            </a>
+
+            <a href="/performance" class="menu-item active">
+                <span>📝</span>
+                Performance
+            </a>
+
+            <a href="#" class="menu-item">
+                <span>📅</span>
+                Attendance
+            </a>
+
+            <a href="#" class="menu-item">
+                <span>📄</span>
+                Reports
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <a href="/" class="menu-item logout">
+                <span>🚪</span>
+                Logout
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="main-content">
+
+        <header class="topbar">
+
+            <div>
+
+                <h1>Student Performance</h1>
+
+                <p>
+                    Detailed academic performance
+                </p>
+
+            </div>
+
+
+            <div class="profile">
+
+                <div class="notification">
+                    🔔
+                </div>
+
+                <div class="avatar">
+                    A
+                </div>
+
+                <div>
+                    <strong>Admin</strong>
+                    <small>Administrator</small>
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- STUDENT HEADER -->
+
+        <section class="student-profile-header">
+
+            <div class="large-student-avatar">
+                {{ student["name"][0] }}
+            </div>
+
+            <div>
+
+                <h2>
+                    {{ student["name"] }}
+                </h2>
+
+                <p>
+                    {{ student["student_id"] }}
+                    •
+                    {{ student["department"] }}
+                    •
+                    {{ student["year"] }}
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- SUMMARY CARDS -->
+
+        <section class="stats-grid">
+
+            <div class="stat-card">
+
+                <div class="stat-icon purple">
+                    📊
+                </div>
+
+                <div>
+
+                    <p>
+                        Average Marks
+                    </p>
+
+                    <h3>
+                        {{ average }}%
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon green">
+                    📅
+                </div>
+
+                <div>
+
+                    <p>
+                        Attendance
+                    </p>
+
+                    <h3>
+                        {{ attendance }}%
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon blue">
+                    🏆
+                </div>
+
+                <div>
+
+                    <p>
+                        Grade
+                    </p>
+
+                    <h3>
+                        {{ grade }}
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon orange">
+                    📚
+                </div>
+
+                <div>
+
+                    <p>
+                        Subjects
+                    </p>
+
+                    <h3>
+                        {{ performance|length }}
+                    </h3>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- PERFORMANCE TABLE -->
+
+        <!-- ADD PERFORMANCE -->
+
+<div class="dashboard-card">
+
+    <div class="card-header">
+
+        <div>
+
+            <h3>
+                Add Performance
+            </h3>
+
+            <p>
+                Enter marks and attendance for a subject
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <form
+        method="POST"
+        action="/student-performance/{{ student['student_id'] }}"
+        class="performance-form"
+    >
+
+        <div class="performance-form-row">
+
+
+            <!-- SUBJECT -->
+
+            <div class="form-group">
+
+                <label>
+                    Subject *
+                </label>
+
+                <select
+                    name="subject"
+                    required
+                >
+
+                    <option value="">
+                        Select subject
+                    </option>
+
+                    <option value="Python">
+                        Python
+                    </option>
+
+                    <option value="DBMS">
+                        DBMS
+                    </option>
+
+                    <option value="Artificial Intelligence">
+                        Artificial Intelligence
+                    </option>
+
+                    <option value="Machine Learning">
+                        Machine Learning
+                    </option>
+
+                    <option value="Web Development">
+                        Web Development
+                    </option>
+
+                    <option value="Data Structures & Algorithms">
+                        Data Structures & Algorithms
+                    </option>
+
+                    <option value="Cyber Security">
+                        Cyber Security
+                    </option>
+
+                    <option value="Computer Networks">
+                        Computer Networks
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- MARKS -->
+
+            <div class="form-group">
+
+                <label>
+                    Marks (%)
+                </label>
+
+                <input
+                    type="number"
+                    name="marks"
+                    min="0"
+                    max="100"
+                    step="0.01"
+                    placeholder="Enter marks"
+                    required
+                >
+
+            </div>
+
+
+            <!-- ATTENDANCE -->
+
+            <div class="form-group">
+
+                <label>
+                    Attendance (%)
+                </label>
+
+                <input
+                    type="number"
+                    name="attendance"
+                    min="0"
+                    max="100"
+                    step="0.01"
+                    placeholder="Enter attendance"
+                    required
+                >
+
+            </div>
+
+
+            <!-- BUTTON -->
+
+            <div class="performance-submit">
+
+                <button
+                    type="submit"
+                    class="save-button"
+                >
+                    + Add Performance
+                </button>
+
+            </div>
+
+        </div>
+
+    </form>
+
+</div>
+
+
+<!-- SUBJECT PERFORMANCE -->
+
+<div class="dashboard-card">
+
+    <div class="card-header">
+
+        <div>
+
+            <h3>
+                Subject Performance
+            </h3>
+
+            <p>
+                Marks and attendance by subject
+            </p>
+
+        </div>
+
+        <a href="/performance">
+            ← Back
+        </a>
+
+    </div>
+
+
+    {% if performance %}
+
+    <div style="overflow-x:auto;">
+
+        <table class="student-table">
+
+            <thead>
+
+                <tr>
+
+                    <th>Subject</th>
+
+                    <th>Marks</th>
+
+                    <th>Attendance</th>
+
+                    <th>Status</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for record in performance %}
+
+                <tr>
+
+                    <td>
+
+                        <strong>
+                            {{ record["subject"] }}
+                        </strong>
+
+                    </td>
+
+
+                    <td>
+                        {{ record["marks"] }}%
+                    </td>
+
+
+                    <td>
+                        {{ record["attendance"] }}%
+                    </td>
+
+
+                    <td>
+
+                        {% if record["marks"] >= 50 %}
+
+                        <span class="status-pass">
+                            Passed
+                        </span>
+
+                        {% else %}
+
+                        <span class="status-fail">
+                            Needs Improvement
+                        </span>
+
+                        {% endif %}
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    {% else %}
+
+    <div class="empty-state">
+
+        <div>
+            📊
+        </div>
+
+        <h3>
+            No performance records yet
+        </h3>
+
+        <p>
+            Add marks and attendance using the form above.
+        </p>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+                    <h3>
+                        Subject Performance
+                    </h3>
+
+                    <p>
+                        Marks and attendance by subject
+                    </p>
+
+                </div>
+
+                <a href="/performance">
+                    ← Back
+                </a>
+
+            </div>
+
+
+            {% if performance %}
+
+            <div style="overflow-x:auto;">
+
+                <table class="student-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Subject</th>
+                            <th>Marks</th>
+                            <th>Attendance</th>
+                            <th>Status</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        {% for record in performance %}
+
+                        <tr>
+
+                            <td>
+                                <strong>
+                                    {{ record["subject"] }}
+                                </strong>
+                            </td>
+
+                            <td>
+                                {{ record["marks"] }}%
+                            </td>
+
+                            <td>
+                                {{ record["attendance"] }}%
+                            </td>
+
+                            <td>
+
+                                {% if record["marks"] >= 50 %}
+
+                                <span class="status-pass">
+                                    Passed
+                                </span>
+
+                                {% else %}
+
+                                <span class="status-fail">
+                                    Needs Improvement
+                                </span>
+
+                                {% endif %}
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            {% else %}
+
+            <div class="empty-state">
+
+                <div>📊</div>
+
+                <h3>
+                    No performance records yet
+                </h3>
+
+                <p>
+                    Performance data will appear here once marks are added.
+                </p>
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>

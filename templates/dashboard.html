@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard | Student Performance Tracking System</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body class="dashboard-body">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-icon">🎓</div>
+
+            <div>
+                <h2>StudentTrack</h2>
+                <span>Performance System</span>
+            </div>
+        </div>
+
+        <nav class="sidebar-menu">
+
+            <a href="/dashboard" class="menu-item active">
+                <span>📊</span>
+                Dashboard
+            </a>
+
+            <a href="#" class="menu-item">
+                <span>👨‍🎓</span>
+                Students
+            </a>
+
+            <a href="/performance" class="menu-item">
+    <span>📝</span>
+    Performance
+</a>
+
+            <a href="#" class="menu-item">
+                <span>📅</span>
+                Attendance
+            </a>
+
+           <a href="/students" class="menu-item">
+    <span>👨‍🎓</span>
+    Reports
+</a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <a href="/" class="menu-item logout">
+                <span>🚪</span>
+                Logout
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <!-- Top Bar -->
+        <header class="topbar">
+
+            <div>
+                <h1>Dashboard</h1>
+                <p>Student Performance Overview</p>
+            </div>
+
+            <div class="profile">
+
+                <div class="notification">
+                    🔔
+                </div>
+
+                <div class="avatar">
+                    A
+                </div>
+
+                <div>
+                    <strong>Admin</strong>
+                    <small>Administrator</small>
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- Welcome -->
+        <section class="welcome-section">
+
+            <div>
+                <h2>Good morning, Admin 👋</h2>
+
+                <p>
+                    Here's what's happening with your students today.
+                </p>
+            </div>
+
+            <button class="primary-button">
+                + Add Student
+            </button>
+
+        </section>
+
+
+        <!-- Statistics -->
+        <section class="stats-grid">
+
+            <div class="stat-card">
+
+                <div class="stat-icon blue">
+                    👨‍🎓
+                </div>
+
+                <div>
+                    <p>Total Students</p>
+                    <h3>120</h3>
+                    <span class="positive">↑ 8% this month</span>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon purple">
+                    📈
+                </div>
+
+                <div>
+                    <p>Average Performance</p>
+                    <h3>78%</h3>
+                    <span class="positive">↑ 5% this month</span>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon green">
+                    📅
+                </div>
+
+                <div>
+                    <p>Attendance Rate</p>
+                    <h3>86%</h3>
+                    <span class="positive">↑ 3% this month</span>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon orange">
+                    ⚠️
+                </div>
+
+                <div>
+                    <p>Need Attention</p>
+                    <h3>12</h3>
+                    <span class="warning">Students at risk</span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Dashboard Content -->
+        <section class="dashboard-grid">
+
+            <!-- Performance -->
+            <div class="dashboard-card performance-card">
+
+                <div class="card-header">
+
+                    <div>
+                        <h3>Performance Overview</h3>
+                        <p>Average marks by subject</p>
+                    </div>
+
+                    <select>
+                        <option>This Semester</option>
+                        <option>Last Semester</option>
+                    </select>
+
+                </div>
+
+                <div class="chart-placeholder">
+
+                    <div class="chart-bars">
+
+    <div class="chart-bars">
+
+    <div class="bar-wrapper">
+        <div class="bar" style="height: {{ chart_values.python }}%;"></div>
+        <span>Python</span>
+    </div>
+
+    <div class="bar-wrapper">
+        <div class="bar" style="height: {{ chart_values.dbms }}%;"></div>
+        <span>DBMS</span>
+    </div>
+
+
+    <div class="bar-wrapper">
+        <div class="bar" style="height: {{ chart_values.web }}%;"></div>
+        <span>Web</span>
+    </div>
+
+    <div class="bar-wrapper">
+        <div class="bar" style="height: {{ chart_values.dsa }}%;"></div>
+        <span>DSA</span>
+    </div>
+
+    <div class="bar-wrapper">
+        <div class="bar" style="height: {{ chart_values.cyber }}%;"></div>
+        <span>Cyber</span>
+    </div>
+
+    <div class="bar-wrapper">
+
+    <div
+        class="bar"
+        style="--bar-height: {{ chart_values.networks }}%;"
+    ></div>
+
+    <span>Networks</span>
+
+</div>
+
+</div>
+
+</div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Recent Students -->
+            <div class="dashboard-card">
+
+                <div class="card-header">
+
+                    <div>
+                        <h3>Recent Students</h3>
+                        <p>Recently added students</p>
+                    </div>
+
+                    <a href="#">View All</a>
+
+                </div>
+
+
+                <div class="student-list">
+
+                    <div class="student-row">
+
+                        <div class="student-avatar">
+                            RS
+                        </div>
+
+                        <div class="student-info">
+                            <strong>Rahul Sharma</strong>
+                            <span>CSE • 3rd Year</span>
+                        </div>
+
+                        <strong class="score">85%</strong>
+
+                    </div>
+
+
+                    <div class="student-row">
+
+                        <div class="student-avatar">
+                            AP
+                        </div>
+
+                        <div class="student-info">
+                            <strong>Ananya Patel</strong>
+                            <span>CSE • 3rd Year</span>
+                        </div>
+
+                        <strong class="score">91%</strong>
+
+                    </div>
+
+
+                    <div class="student-row">
+
+                        <div class="student-avatar">
+                            VK
+                        </div>
+
+                        <div class="student-info">
+                            <strong>Vikram Kumar</strong>
+                            <span>IT • 2nd Year</span>
+                        </div>
+
+                        <strong class="score">76%</strong>
+
+                    </div>
+
+
+                    <div class="student-row">
+
+                        <div class="student-avatar">
+                            SM
+                        </div>
+
+                        <div class="student-info">
+                            <strong>Sneha Mehta</strong>
+                            <span>CSE • 4th Year</span>
+                        </div>
+
+                        <strong class="score">88%</strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Bottom Cards -->
+        <section class="bottom-grid">
+
+            <div class="dashboard-card quick-card">
+
+                <h3>Quick Actions</h3>
+
+                <div class="quick-actions">
+
+                    <button>
+                        👨‍🎓
+                        <span>Add Student</span>
+                    </button>
+
+                    <button>
+                        📝
+                        <span>Enter Marks</span>
+                    </button>
+
+                    <button>
+                        📊
+                        <span>View Reports</span>
+                    </button>
+
+                    <button>
+                        📅
+                        <span>Attendance</span>
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-card attendance-card">
+
+                <div class="card-header">
+
+                    <div>
+                        <h3>Attendance</h3>
+                        <p>Overall attendance</p>
+                    </div>
+
+                    <span class="attendance-percent">
+                        86%
+                    </span>
+
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress"></div>
+                </div>
+
+                <div class="attendance-info">
+
+                    <span>
+                        Present: <strong>103</strong>
+                    </span>
+
+                    <span>
+                        Absent: <strong>17</strong>
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+
+</html>
